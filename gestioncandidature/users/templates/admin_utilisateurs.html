@@ -1,0 +1,413 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Candidatures</title>
+
+    <style>
+     /* ======= 2. Navigation (Header) ======= */
+    :root {
+  --primary-color: #6B46C1;
+  --primary-dark: #553C9A;
+  --primary-light: #9F7AEA;
+  --secondary-color: #4A5568;
+  --bg-light: #F7FAFC;
+  --text-dark: #2D3748;
+  --text-light: #A0AEC0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  margin: 0;
+}
+
+      .container-offre{
+
+      margin-top:120px;
+
+      }
+
+      .bg {
+        margin-top: 20px;
+       }
+
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: radial-gradient(circle at bottom, #4e2c92 0%, #1b0035 20%, #0e001f 100%);
+            border-radius: 15px;
+            padding: 10px 20px;
+            max-width: 1160px;
+            margin: 0 auto;
+            left: 150px;
+            top:20px;
+        
+        }
+
+        .nav-links {
+          display: flex;
+        gap: 30px;
+        margin-right: 80px;
+         }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+        
+        .logo-icon {
+            height: 30px;
+            vertical-align: middle;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .icon-button {
+            background-color: transparent;
+            border: 1px solid #444;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .icon-button img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+        
+        .right-section {
+            display: flex;
+            gap: 15px;
+        }
+        
+     
+        
+        .consult-btn {
+            background-color: #6f5cff;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+.nav-links a,
+.signup a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.signup a:hover {
+  color: #ccc;
+}
+
+.signup a {
+  font-weight: 500;
+  margin-right: 100px;
+}
+
+
+
+      main {
+    padding-top: 5px; 
+     padding-bottom: 5px; 
+     border-radius: 12px;/* Ajustement pour éviter la superposition avec le header */
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    background: radial-gradient(circle at bottom, #4e2c92 0%, #1b0035 20%, #0e001f 100%);
+    
+}
+        h2, h3 {
+           font-size: 1.8em;
+           color: #ffffff;
+           margin-bottom: 20px;
+           margin-left: 50px;
+        }
+        table {
+            width: 95%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: #fdfcff;
+            color: rgb(0, 0, 0);
+            border-radius: 15px;
+            overflow: hidden;
+            font-size: 18px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        thead {
+            background: radial-gradient(circle at bottom, #8a4fff 0%, #1b00352a 40%, #0e001f18 100%);
+            color: #000000;
+        }
+        th, td {
+            padding: 20px;
+            border: 1px solid #d1bfde;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #dddae1;
+        }
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        td a {
+            color: #d1b3ff;
+            text-decoration: none;
+        }
+        td a:hover {
+            text-decoration: underline;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #2a1549;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #2a1549;
+            color: white;
+        }
+        button {
+            background-color: #5a189a;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .sup{
+            background-color: #0e001f00;
+        }
+        button:hover {
+            background-color: #3c096c;
+        }
+        form  {
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            text-align: left;
+            background-color: #2a1549;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px #3a1c5d;
+            color: white;
+        }
+        
+        input[type="text"], input[type="email"], input[type="password"] {
+                      width: 100%;
+            padding: 8px;
+            border: 1px solid #553092;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fdfdfd;
+            color: rgb(58, 28, 97);
+        }
+        #role{
+            padding: 8px;
+            border: 1px solid #553092;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fdfdfd;
+            color: rgb(0, 0, 0);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        #form-ajout {
+            display: none;
+        }
+        #btn-ajouter-utilisateur {
+            margin: 30px auto;
+            background-color: #7b2ff7;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 16px;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            max-width: 1000px;
+        }
+        #btn-ajouter-utilisateur:hover {
+            background-color: #5200d6;
+        }
+        .form-buttons {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .form-buttons button {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+   <section class="bg">
+   <div class="container">
+    <header class="navbar">
+        <div class="logo"> 
+            <img src="{% static 'images/image.png' %}" alt="HireFlex logo" class="logo-icon">
+           
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'admin_dashboard' %}">Accueil</a>
+            <a href="{% url 'admin_dashboard2' %}">Tableau de bord</a>
+            <a href="{% url 'admin_utilisateurs' %}">Utilisateurs</a>
+            <a href="{% url 'admin_candidatures' %}">Candidatures</a>
+            <a href="{% url 'admin_offres' %}">Offres</a>
+            
+            <a href="{% url 'admin_notifications' %}">Notifications</a>
+        </nav>
+           <div class="right-section">
+           <button class="consult-btn"   onclick="window.location.href='{% url 'logout' %}'">Déconnexion</button>
+       </div>
+    </header>
+  </section>
+   
+    <main style="margin-top: 60px;">
+        <h2>Liste des utilisateurs</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Nom d'utilisateur</th>
+                    <th>Rôle</th>
+                    <th>Modifier</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in utilisateurs %}
+                <tr>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>
+                        <form method="post" style="margin:0;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="modifier">
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <select name="role" style="min-width: 120px;">
+                                {% for group in groupes %}
+                                    <option value="{{ group.name }}" {% if group in user.groups.all %}selected{% endif %}>{{ group.name }}</option>
+                                {% endfor %}
+                            </select>
+                    </td>
+                    <td>
+                            <button type="submit">Mettre à jour</button>
+                        </form>
+                    </td>
+                    <td>
+                         <form method="post" style="margin:0;">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="supprimer">
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <button class="sup" type="submit" onclick="return confirm('Confirmer la suppression ?')">Supprimer</button>
+                        </form> 
+                    </td>
+                </tr>
+            {% empty %}
+                <tr><td colspan="7">Aucun utilisateur trouvé.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Bouton pour afficher le formulaire -->
+        <button id="btn-ajouter-utilisateur">Ajouter un utilisateur</button>
+
+        <!-- Formulaire caché au départ -->
+        <form id="form-ajout" method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="action" value="ajouter">
+
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="role">Rôle :</label>
+            <select id="role" name="role" required>
+                {% for group in groupes %}
+                    <option value="{{ group.name }}">{{ group.name }}</option>
+                {% endfor %}
+            </select>
+
+            <div class="form-buttons">
+                <button type="submit">Ajouter</button>
+                <button type="button" id="btn-annuler">Annuler</button>
+            </div>
+        </form>
+    </main>
+
+    <script>
+        const btnAfficherForm = document.getElementById('btn-ajouter-utilisateur');
+        const formulaire = document.getElementById('form-ajout');
+        const btnAnnuler = document.getElementById('btn-annuler');
+
+        btnAfficherForm.addEventListener('click', function () {
+            formulaire.style.display = 'block';
+            btnAfficherForm.style.display = 'none';
+            formulaire.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        btnAnnuler.addEventListener('click', function () {
+            formulaire.reset();
+            formulaire.style.display = 'none';
+            btnAfficherForm.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

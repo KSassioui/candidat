@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 120px; /* Assurez-vous que le contenu n'est pas caché sous le header */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: transparent;
+    z-index: 1000;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ajout d'une légère ombre pour améliorer la visibilité du header */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: auto;
+    height: 100px;
+    margin-left: 50px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    background-color: #bea6ff4c;
+    padding: 1.2%;
+    border-radius: 30px;
+    margin-right: 90px;
+}
+
+.nav-links a,
+.signup a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.signup a:hover {
+    color: #ccc;
+}
+
+.signup a {
+    font-weight: 500;
+    margin-right: 100px;
+}
+
+.content {
+    margin-top: 80px; /* Décalage pour compenser la hauteur du header fixe */
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 2rem;
+}
+
+form {
+    margin: 20px 0;
+}
+
+button {
+    background-color: #a38bfa;
+    color: black;
+    padding: 0.8rem 1.5rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #bda6ff;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}

@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offres d'emploi - JobK</title>
+  <link rel="stylesheet" href="{% static 'css/style0.css' %}">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">
+    <img src="{% static 'images/image.png' %}" alt="HireFlex logo" class="logo-icon">
+  </div>
+  <nav class="nav-links">
+    <a href="{% url 'accueil' %}">Accueil</a>
+    <a href="{% url 'offres' %}">Offre d'emploi</a>
+    <a href="{% url 'candidature' %}">Ma candidature</a>
+    <a href="#">Mon profil</a>
+  </nav>
+  <div class="signup">
+    <a href="{% url 'logout' %}">Déconnexion</a>
+  </div>
+</header>
+
+<section style="padding: 2rem;">
+  <div class="title">
+    <h2>Offres d'emploi disponibles</h2>
+  </div>
+
+  <!-- Affichage des offres d'emploi dynamiques -->
+  {% for offre in offres %}
+    <div class="offrejob" style="margin: 1rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 10px;">
+      <h3>{{ offre.titre }}</h3>
+      <p><strong>Description :</strong> {{ offre.description }}</p>
+      <p><strong>Publié le :</strong> {{ offre.date_publication|date:"d F Y" }}</p>
+      <p><strong>Auteur :</strong> {{ offre.Administrateur.first_name }} {{ offre.Administrateur.last_name }}</p>
+      <button>Voir les détails</button>
+    </div>
+  {% empty %}
+    <p>Aucune offre d'emploi disponible pour le moment.</p>
+  {% endfor %}
+</section>
+
+<footer class="custom-footer">
+  <img src="{% static 'images/J (2).png' %}" alt="" class="footerlogo">
+  <p>Plateforme d’emploi au Maroc pour les candidats et les recruteurs.</p>
+  
+  <div class="footer-sections">
+    <div>
+      <h3>Candidats</h3>
+      <ul>
+        <li>Déposer votre CV</li>
+        <li>Consulter les offres</li>
+        <li>Créer une alerte emploi</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Recruteurs</h3>
+      <ul>
+        <li>Publier une annonce</li>
+        <li>Consulter les CV</li>
+        <li>Nos packs</li>
+      </ul>
+    </div>
+    <div>
+      <h3>À propos</h3>
+      <ul>
+        <li>Qui sommes-nous ?</li>
+        <li>Contact</li>
+        <li>Conditions d'utilisation</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-bottom">&copy; 2025 JobK.ma - Tous droits réservés</p>
+</footer>
+
+</body>
+</html>

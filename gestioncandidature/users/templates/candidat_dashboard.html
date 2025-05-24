@@ -1,0 +1,685 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JobK</title>
+  <link rel="stylesheet" href="{% static 'css/style0.css' %}">
+</head>
+<body>
+  <section class="bg">
+    <header class="navbar">
+        <div class="logo"> 
+          <img src="{% static 'images/image.png' %}"alt="JobK logo" class="logo-icon">
+         
+        </div>
+        <nav class="nav-links">
+          <a href="{% url 'candidat_dashboard' %}">Accueil</a>
+          <a href="{% url 'candidat_offre' %}">Offre d'emploi</a>
+          <a href="{% url 'candidat_candidature' %}">Ma candidature</a>
+          <a href="{% url 'mes_notifications' %}">Mes Notifications</a>
+          <a href="{% url 'candidat_profile' %}">Mon profil</a>
+      </nav>
+        <div class="signup">
+          <a href="{% url 'logout' %}">Déconnexion</a>
+        </div>
+      </header>
+
+       <!-- icon de user  -->
+      
+      <button class="user-button">
+        <svg class="userIcon" viewBox="0 0 24 24">
+          <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+        </svg>
+        <span class="username">{{ request.user.username }}</span>
+      </button>
+      
+      <!-- Bouton des notifications -->
+<button class="notif-button" onclick="window.location.href='{% url 'mes_notifications' %}'">
+  <svg class="notifIcon" viewBox="0 0 24 24">
+    <path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 0 0 2 2zm6-6V11c0-3.1-1.6-5.6-4.5-6.3V4a1.5 1.5 0 0 0-3 0v0.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/>
+  </svg>
+  <span class="notif-text">Notifications</span>
+   {% if nb_notifications > 0 %}
+    <span class="notif-badge">{{ nb_notifications }}</span>
+  {% endif %}
+</button>
+      
+      <style>
+   .user-button {
+  position: fixed;
+  top: 680px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(73, 20, 134);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 9999;
+  transition:
+   width 0.3s ease,
+    border-radius 0.3s ease,
+    background-color 0.3s ease,
+    padding-left 0.3s ease,
+    justify-content 0.3s ease;
+}
+
+.userIcon {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.username {
+  position: absolute; /* Retiré du flow normal */
+  opacity: 0;
+  color: white;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-left: 40px; /* apparaîtra à droite de l’iône */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(10px);
+  pointer-events: none;
+}
+
+.user-button:hover {
+  width: 160px;
+  border-radius: 50px;
+  background-color: rgb(73, 20, 134);
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+
+.user-button:hover .username {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
+
+
+
+.notif-button {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(73, 20, 134);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 9999;
+  transition:
+    width 0.3s ease,
+    border-radius 0.3s ease,
+    background-color 0.3s ease,
+    padding-left 0.3s ease,
+    justify-content 0.3s ease;
+}
+
+.notifIcon {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.notif-text {
+  position: absolute;
+  opacity: 0;
+  color: white;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-left: 40px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateX(10px);
+  pointer-events: none;
+}
+
+.notif-button:hover {
+  width: 170px;
+  border-radius: 50px;
+  background-color: rgb(73, 20, 134);
+  justify-content: flex-start;
+  padding-left: 15px;
+}
+
+.notif-button:hover .notif-text {
+  opacity: 1;
+  transform: translateX(0);
+}
+.notif-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: red;
+  color: white;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+  z-index: 10000;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+      </style>
+
+
+
+       <!-- icon de notif  -->
+
+
+
+
+
+  <h1>Postule maitenant et envoi ta candidature </h1>
+  <p>Best candidates using our intelligent hiring platform</p>
+  <div class="buttons">
+    <button onclick="window.location.href='http://127.0.0.1:8000/offres-candidat/'">Postuler</button>
+    <button style="background-color: transparent; border: 2px solid #a38bfa; color: #a38bfa;">Voir mes candidatures</button>
+  </div>
+</section>
+
+
+
+
+
+<!-- Offre d'emploi card personnalisée 
+<div class="title" id="offres">
+  <h2>Offres d'emploi disponibles</h2>
+</div>
+
+<section style="padding: 2rem; display: flex; justify-content: center; align-items: center;">
+  <div class="offrejob" style="max-width: 600px;">
+    <h3>Développeur Full-Stack</h3>
+    <p><strong>Description :</strong> Nous recherchons un développeur full-stack passionné pour rejoindre notre équipe dynamique et travailler sur des projets innovants.</p>
+    <p><strong>Publié le :</strong> 25 Avril 2025</p>
+    <p><strong>Auteur :</strong> Aya Kathiri</p>
+    <button>Voir les détails</button>
+  </div>
+</section>
+ Fin offre d'emploi card -->
+
+
+<section >
+<div class="title">
+  <h2>Offres d'emploi recent</h2>
+</div>
+<div class="slider">
+  <div class="slider-track">
+    {% for offre in offres %}
+      <div class="card">
+        <div class="card__hero">
+          <div class="card__hero-header">
+            <span>{{ offre.date_publication|date:"d M Y" }}</span>
+            <span>{{ offre.Administrateur.username }}</span>
+          </div>
+          <div  style="color: rgb(31, 8, 114);"class="card__job-title">{{ offre.titre }}</div>
+          <p style="color: black;"><strong>Description :</strong> {{ offre.description }}</p>
+        </div>
+        <div class="card__footer">
+          <button class="card__btn">Voir les détails</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+</section>
+
+
+<style> 
+.card {
+  margin: auto;
+  width: min(300px, 100%);
+  background-color: #fefefe;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  color: #141417;
+}
+.card__hero {
+  background: radial-gradient(circle at bottom, #8a4fff 0%, #1b00352a 40%, #0e001f18 100%);
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 1.5rem;
+  font-size: 0.875rem;
+}
+.card__hero .card__job-title {
+  margin: 2rem 0;
+  font-size: 2rem;
+  font-weight: 600;
+  padding-right: 2rem;
+}
+.card__hero-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  font-weight: 700;
+}
+.card__footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: start;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 0.75rem;
+  row-gap: 1rem;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+@media (min-width: 340px) {
+  .card__footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+.card__job-summary {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+}
+.card__btn {
+  width: 100%;
+  font-weight: 400;
+  border: none;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem 1.25rem;
+  border-radius: 1rem;
+  background-color: #141417;
+  color: #fff;
+  font-size: 1rem;
+}
+@media (min-width: 340px) {
+  .card__btn {
+    width: max-content;
+  }
+}
+
+
+/* Slider container */
+.slider {
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+}
+
+/* Moving track */
+.slider-track {
+  display: flex;
+  width: max-content;
+  animation: scroll 20s linear infinite;
+}
+
+.slider-track:hover {
+  animation-play-state: paused;
+}
+
+/* Card animation: zoom on hover */
+.card {
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  margin: 0 0.75rem;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Keyframes for scrolling */
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-20%);
+  }
+}
+
+  
+</style>
+
+
+<!-- image style -->
+<div class="container-img">
+     
+  <section class="hero-section">
+      <h1 class="hero-title">
+          Élever votre <span class="solution-text">chance</span><br>
+          d’être <span class="digital-text">Repéré</span> et
+      </h1>
+      <div class="buttons">
+          <button onclick="window.location.href='http://127.0.0.1:8000/offres-candidat/'">Postuler</button>
+      </div>
+  </section>
+</div>
+
+
+<style>
+  .container-img {
+    max-width: 1400px;
+    margin: 20px auto;
+    background-image: 
+  linear-gradient(rgba(0, 0, 0, 0.69), rgb(8, 2, 23)),
+  url(https://img.freepik.com/premium-photo/shot-four-beautiful-smart-business-women-work-with-laptops-desk-coworking-space-office_519356-2888.jpg?semt=ais_hybrid&w=740);
+    border-radius: 25px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-size: cover;  
+    margin-left: 0px;
+  }
+  
+  
+  
+  .hero-section {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  
+  .hero-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: aliceblue;
+  }
+  
+  .solution-text {
+    color: #9154fa;
+  }
+  
+  .digital-text {
+    color:#9154fa ;
+  }
+  
+  .hero-subtitle {
+    font-size: 18px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .right-section {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .hero-title {
+        font-size: 36px;
+    }
+  }
+  
+  .buttons {
+  margin-top: 2rem;
+  }
+  
+  .buttons button {
+  background-color: #a38bfa;
+  color: black;
+  padding: 0.8rem 1.5rem;
+  margin: 0 1rem;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  }
+  
+  .buttons button:hover {
+  background-color:#bda6ff;
+  }
+  </style>
+  
+
+
+
+
+
+<section class="banner">
+  <p class="titres"><strong><br>Comment ça marche?</strong></p>
+  <div class="timeline">
+    <div class="step">
+      <div class="step-number">1</div>
+      <div class="step-text">Publication de l’offre</div>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <div class="step-text">Envoi de la candidature<br>par voie électronique</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-text">Réception de la candidature</div>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-text">Réception de la réponse par notification</div>
+    </div>
+   
+  </div>
+
+
+  <style>
+    .banner{
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at bottom, #8a4fff 0%, #1b0035dd 40%, #0e001f9d 100%);
+      color: white;
+    }
+     .titres{
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      font-size: 50px;
+      top: 10px;
+      
+      
+     }
+    .timeline {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 35px;
+      padding: 50px 20px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      max-width: 180px;
+    }
+
+    .step-number {
+      width: 100px;
+      height: 100px;
+      border: 3px solid white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.5em;
+      font-weight: bold;
+      background-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .step-text {
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50px;
+      right: -65px;
+      width: 80px;
+      height: 3px;
+      background-color: #F2B332;
+      z-index: 1;
+    }
+
+    @media (max-width: 760px) {
+      .timeline {
+        flex-direction: column;
+        align-items: center;
+      }
+      .step:not(:last-child)::after {
+        display: none;
+      }
+    }
+  </style>
+</section>
+
+
+
+
+
+
+
+
+<section>
+  
+  <div class="carousel-container">
+    <div class="carousel-track">
+      <!-- Repeat company cards to allow looping -->
+      <div class="job-card">
+        <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark2-Dark-Background-Logo.wine.svg" alt="Tesla Logo">
+        <h3>Tesla</h3>
+        <p style="color: #141417;">Hiring AI Engineers for Self-Driving Tech</p>
+      </div>
+      <div class="job-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Google Logo">
+        <h3>Google</h3>
+        <p style="color: #141417;">Software Engineers for Cloud Infra</p>
+      </div>
+      <div class="job-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo">
+        <h3>Microsoft</h3>
+        <p style="color: #141417;">Internships in Quantum Computing</p>
+      </div>
+      <div class="job-card">
+        <img src="https://www.svgrepo.com/show/424909/meta-logo-facebook-2.svg" alt="Meta Logo">
+        <h3>Meta</h3>
+        <p style="color: #141417;">AR/VR Devs for the Metaverse</p>
+      </div>
+      <div class="job-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Netflix_icon.svg/1200px-Netflix_icon.svg.png" alt="Netflix Logo">
+        <h3>Netflix</h3>
+        <p style="color: #141417;">Data Analysts for Streaming Insights</p>
+      </div>
+      <!-- Duplicate cards for infinite loop -->
+      <div class="job-card">
+        <img src="https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark%26Wordmark2-Dark-Background-Logo.wine.svg" alt="Tesla Logo">
+        <h3>Tesla</h3>
+        <p style="color: #141417;">Hiring AI Engineers for Self-Driving Tech</p>
+      </div>
+      <div class="job-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Google Logo">
+        <h3>Google</h3>
+        <p style="color: #141417;">Software Engineers for Cloud Infra</p>
+      </div>
+      <div class="job-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo">
+        <h3>Microsoft</h3>
+        <p style="color: #141417;">Internships in Quantum Computing</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="custom-footer">
+ <img src="J (2).png" alt=""  class="footerlogo">
+  <p>Plateforme d’emploi au Maroc pour les candidats et les recruteurs.</p>
+  
+  <div class="footer-sections">
+    <div>
+      <h3>Candidats</h3>
+      <ul>
+        <li>Déposer votre CV</li>
+        <li>Consulter les offres</li>
+        <li>Créer une alerte emploi</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Recruteurs</h3>
+      <ul>
+        <li>Publier une annonce</li>
+        <li>Consulter les CV</li>
+        <li>Nos packs</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>À propos</h3>
+      <ul>
+        <li>Qui sommes-nous ?</li>
+        <li>Contact</li>
+        <li>Conditions d'utilisation</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-bottom">&copy; 2025 JobK.ma - Tous droits réservés</p>
+</footer>
+
+
+
+<script>
+
+window.addEventListener('scroll', function () {
+  const header = document.querySelector('header');
+  const middleOfPage = window.innerHeight / 8;
+
+  if (window.scrollY > middleOfPage) {
+    header.style.opacity = '0';
+    header.style.pointerEvents = 'none'; // prevents interaction
+  } else {
+    header.style.opacity = '1';
+    header.style.pointerEvents = 'auto';
+  }
+});
+
+
+</script>
+
+</body>
+</html>

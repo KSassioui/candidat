@@ -1,0 +1,334 @@
+/* ======= 2. Navigation (Header) ======= */
+    :root {
+  --primary-color: #6B46C1;
+  --primary-dark: #553C9A;
+  --primary-light: #9F7AEA;
+  --secondary-color: #4A5568;
+  --bg-light: #F7FAFC;
+  --text-dark: #2D3748;
+  --text-light: #A0AEC0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  margin: 0;
+}
+
+      .container-offre{
+
+      margin-top:120px;
+
+      }
+
+      .bg {
+        margin-top: 20px;
+       }
+
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: radial-gradient(circle at bottom, #4e2c92 0%, #1b0035 20%, #0e001f 100%);
+            border-radius: 15px;
+            padding: 10px 20px;
+            max-width: 1160px;
+            margin: 0 auto;
+            left: 150px;
+            top:20px;
+        
+        }
+
+        .nav-links {
+          display: flex;
+        gap: 30px;
+        margin-right: 80px;
+         }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+        
+        .logo-icon {
+            height: 30px;
+            vertical-align: middle;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .icon-button {
+            background-color: transparent;
+            border: 1px solid #444;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .icon-button img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+        
+        .right-section {
+            display: flex;
+            gap: 15px;
+        }
+        
+     
+        
+        .consult-btn {
+            background-color: #6f5cff;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+.nav-links a,
+.signup a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.signup a:hover {
+  color: #ccc;
+}
+
+.signup a {
+  font-weight: 500;
+  margin-right: 100px;
+}
+
+
+
+
+    /* Floating User Button */
+    .user-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgb(73, 20, 134);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      overflow: hidden;
+      z-index: 9999;
+      transition:
+        width 0.3s ease,
+        border-radius 0.3s ease,
+        background-color 0.3s ease,
+        padding-left 0.3s ease,
+        justify-content 0.3s ease;
+    }
+
+    .userIcon {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .username {
+      position: absolute;
+      opacity: 0;
+      color: white;
+      font-size: 14px;
+      white-space: nowrap;
+      margin-left: 40px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateX(10px);
+      pointer-events: none;
+    }
+
+    .user-button:hover {
+      width: 160px;
+      border-radius: 50px;
+      background-color: rgb(96, 33, 243);
+      justify-content: flex-start;
+      padding-left: 15px;
+    }
+
+    .user-button:hover .username {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+
+/* ======= 3. Contenu Principal ======= */
+main {
+    padding-top: 5px; 
+     padding-bottom: 5px; 
+     border-radius: 12px;/* Ajustement pour éviter la superposition avec le header */
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    background: radial-gradient(circle at bottom, #4e2c92 0%, #1b0035 20%, #0e001f 100%);
+    
+}
+
+/* ======= 4. Table (Liste des Notifications) ======= */
+h2 {
+    font-size: 1.8em;
+    color: #d1c4ff;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 95%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #d6d5d7;
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
+    overflow: hidden;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+table th, table td {
+    padding: 20px; /* Plus de padding pour une meilleure lisibilité */
+    border: 1px solid #d7c6f3;
+    text-align: left;
+}
+
+table th {
+    background-color: #fefdfe;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+table tr:nth-child(even) {
+    background-color: #e4dfe9;
+}
+
+table tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ======= 5. Formulaire ======= 
+form {
+    background-color: #2a1549;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}*/
+
+form {
+    background-color: #e0670f;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    max-width: 100%; /* Ajuster à 100% pour qu'il prenne toute la largeur disponible */
+    width: 80%; /* Ajuster la largeur pour qu'il prenne plus de place */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+form label {
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(85, 35, 115, 0.1);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+form input::placeholder, form textarea::placeholder {
+    color: #bbb;
+}
+
+button {
+    background-color: #6f5cff; 
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #7b5ce2;
+}
+
+
+
+/* ======= 6. Boutons Modifier & Supprimer ======= */
+.actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  button.btn-modifier,
+  button.btn-supprimer {
+                /* Même que le bouton envoyer */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button.btn-modifier:hover,
+  button.btn-supprimer:hover {
+    background-color: #7b5ce2;
+  }

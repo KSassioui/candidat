@@ -1,0 +1,464 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Notifications</title>
+    <link rel="stylesheet" href="{% static 'css/style5.css' %}">
+    <style>
+        tfoot td {
+            position: sticky;
+            bottom: 0;
+            background-color: #e4e4e4;
+            text-align: center;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        #btn-toggle {
+            padding: 10px 20px;
+            background-color: #553092;
+            border: 1px solid #ccc;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #553092;
+        }
+
+        td, th {
+            text-align: center;
+        }
+        #btn-toggle {
+            width: 100%; /* Prend toute la largeur */
+            background: radial-gradient(circle at bottom, #4e2c92 0%, #1b0035 20%, #0e001f 100%);
+            color: white;
+            border: none;
+            padding: 16px 20px; /* Plus de padding = bouton plus grand */
+            font-size: 18px; /* Texte plus visible */
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(120, 36, 223, 0.95); /* Ombre plus forte */
+        }
+        
+        #btn-toggle:hover {
+            background-color:rgb(195, 173, 216);
+            transform: scale(1.03); /* Effet visuel au survol */
+        }
+        
+
+       textarea {
+    width: 100%;
+    min-height: 150px;
+    padding-bottom: 60px; /* pour laisser de l'espace aux suggestions */
+    box-sizing: border-box;
+    resize: vertical;
+}
+.suggestion-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+    background-color:rgb(76, 62, 99);
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.suggestion-btn:hover {
+    background-color: #d2c4ee;
+}
+    </style>
+
+</head>
+<body>
+  <section class="bg">
+   <div class="container">
+    <header class="navbar">
+        <div class="logo"> 
+            <img src="{% static 'images/image.png' %}" alt="HireFlex logo" class="logo-icon">
+           
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'admin_dashboard' %}">Accueil</a>
+            <a href="{% url 'admin_dashboard2' %}">Tableau de bord</a>
+            <a href="{% url 'admin_utilisateurs' %}">Utilisateurs</a>
+            <a href="{% url 'admin_candidatures' %}">Candidatures</a>
+            <a href="{% url 'admin_offres' %}">Offres</a>
+            
+            <a href="{% url 'admin_notifications' %}">Notifications</a>
+        </nav>
+           <div class="right-section">
+           <button class="consult-btn"   onclick="window.location.href='{% url 'logout' %}'">Déconnexion</button>
+       </div>
+    </header>
+  </section>
+  <style>
+    
+
+/* ======= 2. Navigation (Header) ======= */
+    :root {
+  --primary-color: #6B46C1;
+  --primary-dark: #553C9A;
+  --primary-light: #9F7AEA;
+  --secondary-color: #4A5568;
+  --bg-light: #F7FAFC;
+  --text-dark: #2D3748;
+  --text-light: #A0AEC0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  margin: 0;
+}
+
+      .container-offre{
+
+      margin-top:120px;
+
+      }
+
+        
+ 
+        .nav-links {
+          display: flex;
+        gap: 30px;
+        margin-right: 80px;
+         }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+        
+        .logo-icon {
+            height: 30px;
+            vertical-align: middle;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .icon-button {
+            background-color: transparent;
+            border: 1px solid #444;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .icon-button img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+        
+        .right-section {
+            display: flex;
+            gap: 15px;
+        }
+        
+     
+        
+        .consult-btn {
+            background-color: #6f5cff;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+.nav-links a,
+.signup a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.signup a:hover {
+  color: #ccc;
+}
+
+.signup a {
+  font-weight: 500;
+  margin-right: 100px;
+}
+
+
+
+
+    /* Floating User Button */
+    .user-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgb(73, 20, 134);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      overflow: hidden;
+      z-index: 9999;
+      transition:
+        width 0.3s ease,
+        border-radius 0.3s ease,
+        background-color 0.3s ease,
+        padding-left 0.3s ease,
+        justify-content 0.3s ease;
+    }
+
+    .userIcon {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .username {
+      position: absolute;
+      opacity: 0;
+      color: white;
+      font-size: 14px;
+      white-space: nowrap;
+      margin-left: 40px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateX(10px);
+      pointer-events: none;
+    }
+
+    .user-button:hover {
+      width: 160px;
+      border-radius: 50px;
+      background-color: rgb(96, 33, 243);
+      justify-content: flex-start;
+      padding-left: 15px;
+    }
+
+    .user-button:hover .username {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+  </style>
+
+  <!-- Floating User Button -->
+  <button class="user-button">
+    <svg class="userIcon" viewBox="0 0 24 24">
+      <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+    </svg>
+    <span class="username">{{ request.user.username }}</span>
+  </button>
+
+  <main class="container"  style="margin-top: 50px;">
+   
+
+
+    <main >
+        <!-- Liste des notifications -->
+        <h2  style="color: #ffffff;">Gestion des Notifications</h2>
+        <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Candidat</th>
+                    <th>Message</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notification in notifications %}
+                <tr>
+                    <td>{{ notification.utilisateur.username }}</td>
+                    <td>{{ notification.message }}</td>
+                    <td>
+                        <a href="{% url 'admin_notifications' %}?edit_id={{ notification.id }}">
+                            <button type="button" class="btn-modifier">Modifier</button>
+                        </a>
+                        <a href="{% url 'supprimer_notification' notification.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Confirmer la suppression ?');">Supprimer</button>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Aucune notification trouvée.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <button onclick="toggleForm()" id="btn-toggle">Ajouter une notification</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+
+    <!-- Formulaire pour ajouter ou modifier une notification -->
+    <div id="formulaire-notification" style="display: none; margin-top: 20px; text-align: center;">
+        {% if notification_to_edit %}
+            <h2>Modifier une Notification</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label for="utilisateur">Sélectionner le Candidat :</label><br>
+                {{ form.utilisateur }}
+                <br><br>
+                <label for="message">Message :</label><br>
+
+
+<!-- Conteneur global avec position relative -->
+<div style="position: relative; width: 100%; margin: auto;">
+    <!-- Champ message -->
+    {{ form.message }}
+
+    <!-- Zone des suggestions (comme footer intégré) -->
+    <div id="suggestions" style="
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        right: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        
+        padding: 20px;
+        
+        border-radius: 0 0 5px 5px;
+        z-index: 1;
+    ">
+        <button type="button" class="suggestion-btn" onclick="setSuggestion('Votre candidature a bien été reçue.')">Votre candidature  reçue.</button>
+        <button type="button" class="suggestion-btn" onclick="setSuggestion('Merci pour votre candidature.')">Merci  pour votre candidature.</button>
+        <button type="button" class="suggestion-btn" onclick="setSuggestion('Nous reviendrons vers vous prochainement.')">Nous reviendrons vers vous prochainement.</button>
+        <button type="button" class="suggestion-btn" onclick="setSuggestion('Nous vous contacterons dans les plus brefs délais.')">Nous vous contacterons dans les plus brefs délais.</button>
+    </div>
+</div>
+                <br><br>
+                <button type="submit">Modifier</button>
+                <a href="{% url 'admin_notifications' %}">Annuler</a>
+            </form>
+        {% else %}
+            <h2>Envoyer une Nouvelle Notification</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label for="utilisateur">Sélectionner le Candidat :</label><br>
+                {{ form.utilisateur }}
+                <br><br>
+                <label for="message">Message :</label><br>
+
+
+                <!-- Conteneur global avec position relative -->
+                <div style="position: relative; width: 100%; margin: auto;">
+                    <!-- Champ message -->
+                    {{ form.message }}
+                
+                    <!-- Zone des suggestions (comme footer intégré) -->
+                    <div id="suggestions" style="
+                        position: absolute;
+                        bottom: 5px;
+                        left: 5px;
+                        right: 5px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 5px;
+                        
+                        padding: 20px;
+                        
+                        border-radius: 0 0 5px 5px;
+                        z-index: 1;
+                    ">
+                        <button type="button" class="suggestion-btn" onclick="setSuggestion('Votre candidature a bien été reçue.')">Votre candidature  reçue.</button>
+                        <button type="button" class="suggestion-btn" onclick="setSuggestion('Merci pour votre candidature.')">Merci  pour votre candidature.</button>
+                        <button type="button" class="suggestion-btn" onclick="setSuggestion('Nous reviendrons vers vous prochainement.')">Nous reviendrons vers vous prochainement.</button>
+                        <button type="button" class="suggestion-btn" onclick="setSuggestion('Nous vous contacterons dans les plus brefs délais.')">Nous vous contacterons dans les plus brefs délais.</button>
+                    </div>
+                </div>
+                <br><br>
+                <button type="submit">Envoyer</button>
+            </form>
+        {% endif %}
+    </div>
+</section>
+
+<script>
+function toggleForm() {
+    const formDiv = document.getElementById("formulaire-notification");
+    const btn = document.getElementById("btn-toggle");
+
+    if (formDiv.style.display === "none") {
+        formDiv.style.display = "block";
+        btn.textContent = "Fermer le formulaire";
+
+        // Scroller vers le formulaire
+        formDiv.scrollIntoView({ behavior: "smooth" });
+    } else {
+        formDiv.style.display = "none";
+        btn.textContent = "Ajouter une notification";
+    }
+}
+</script>
+ {% if notification_to_edit %}
+<script>
+   
+        const formDiv = document.getElementById("formulaire-notification");
+        const btn = document.getElementById("btn-toggle");
+
+        formDiv.style.display = "block";
+        btn.textContent = "Fermer le formulaire";
+
+        // Scroller vers le formulaire automatiquement
+        formDiv.scrollIntoView({ behavior: "smooth" });
+    
+</script>
+{% endif %}
+<script>
+    function setSuggestion(message) {
+        const messageField = document.getElementById("id_message");
+        if (messageField) {
+            messageField.value = message;
+        }
+    }
+</script>
+
+
+
+</body>
+</html>

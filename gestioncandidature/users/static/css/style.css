@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+
+   
+   
+  }
+
+
+  .bg{
+    background: radial-gradient(circle at bottom, #8a4fff 0%, #1b0035 40%, #0e001f 100%);
+    height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    border-radius: 10px;
+  }
+
+  .navbar {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 60px;
+position: fixed;
+top: 0;
+width: 100%;
+background-color: transparent; /* Transparent */
+z-index: 1000;
+color: white;
+}
+
+.logo {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.logo-icon {
+width: auto;
+height: 100px;
+margin-left: 50px;
+}
+
+.logo-text {
+font-size: 20px;
+font-weight: bold;
+}
+
+.nav-links {
+display: flex;
+gap: 30px;
+background-color: #bea6ff4c;
+padding: 1.2%;
+border-radius: 30px;
+margin-right: 90px;
+
+}
+
+.nav-links a,
+.signup a {
+text-decoration: none;
+color: white;
+font-size: 16px;
+transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.signup a:hover {
+color: #ccc;
+}
+
+.signup a {
+font-weight: 500;
+margin-right: 100px;
+
+}
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #c0c0c0;
+  }
+
+  .buttons {
+    margin-top: 2rem;
+  }
+
+  .buttons button {
+    background-color: #a38bfa;
+    color: black;
+    padding: 0.8rem 1.5rem;
+    margin: 0 1rem;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .buttons button:hover {
+    background-color:#bda6ff;
+}

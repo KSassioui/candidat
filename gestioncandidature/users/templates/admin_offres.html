@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Offres</title>
+    <link rel="stylesheet" href="{% static 'css/style6.css' %}">
+    <style>
+        tfoot td {
+            position: sticky;
+            bottom: 0;
+            background-color: #c8bdda;
+            text-align: center;
+            padding: 10px;
+            z-index: 10;
+        }
+
+        #btn-toggle {
+            width: 100%;
+            background: radial-gradient(circle at bottom, #8a4fff 0%, #1b00352a 40%, #0e001f18 100%);
+            color: rgb(247, 242, 242);
+            border: none;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #btn-toggle:hover {
+            background-color: rgb(195, 173, 216);
+            transform: scale(1.03);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #553092;
+            color: white;
+        }
+
+        td, th {
+            text-align: center;
+            padding: 10px;
+        }
+
+         .btn-modifier {
+    background-color:#5b36b4;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-modifier:hover {
+    background-color:rgb(111, 30, 173);
+    transform: scale(1.03);
+}
+
+        
+    </style>
+</head>
+<body>
+<section class="bg">
+    <!-- HEADER -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="{% static 'images/image.png' %}" alt="Logo" class="logo-icon">
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'admin_dashboard' %}">Accueil</a>
+            <a href="{% url 'admin_dashboard' %}">Tableau de bord</a>
+            <a href="{% url 'admin_utilisateurs' %}">Utilisateurs</a>
+            <a href="{% url 'admin_candidatures' %}">Candidatures</a>
+            <a href="{% url 'admin_offres' %}">Offres</a>
+            <a href="{% url 'admin_notifications' %}">Notifications</a>
+        </nav>
+                   <div class="right-section">
+           <button class="consult-btn"   onclick="window.location.href='{% url 'logout' %}'">Déconnexion</button>
+       </div>
+    </header>
+
+    <main style="margin-top: 50px;">
+        <h2>Gestion des Offres</h2>
+        <table border="1" cellpadding="10" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for offre in offres %}
+                <tr>
+                    <td>{{ offre.titre }}</td>
+                    <td>{{ offre.description }}</td>
+                    <td>
+                        <div class="btn-actions">
+                            
+                            {% comment %} <button onclick="modifierOffre('{{ offre.id }}', '{{ offre.titre }}', '{{ offre.description }}'  , '{{ offre.lieu|escapejs }}',
+    '{{ offre.contrat|escapejs }}','{{ offre.profil|escapejs }}', '{{ offre.debut }}','{{ offre.candidature }}')" class="btn-modifier">Modifier</button> {% endcomment %}
+                            
+
+    <a href="#" onclick="modifierOffre('{{ offre.id }}', '{{ offre.titre|escapejs }}', '{{ offre.description|escapejs }}', '{{ offre.lieu|escapejs }}',
+'{{ offre.contrat|escapejs }}','{{ offre.profil|escapejs }}', '{{ offre.debut }}','{{ offre.candidature }}')" class="btn-modifier" style="text-decoration: none; color: white;">Modifier</a>
+
+     
+                            {% comment %} <form   action="{% url 'supprimer_offre' offre.id %}" method="post" style="margin: 0;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-supprimer" onclick="return confirm('Confirmer la suppression ?');">Supprimer</button>
+                            </form> {% endcomment %}
+                        
+                         {% comment %} <a href="{% url 'admin_offres' %}?edit_id={{ offre.id }}">
+                            <button onclick="modifierOffre('{{ offre.id }}', '{{ offre.titre }}', '{{ offre.description }}'  , '{{ offre.lieu|escapejs }}',
+    '{{ offre.contrat|escapejs }}','{{ offre.profil|escapejs }}', '{{ offre.debut }}','{{ offre.candidature }}')" class="btn-modifier">Modifier</button>
+                        </a> {% endcomment %}
+                        <a href="{% url 'supprimer_offre' offre.id %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" onclick="return confirm('Confirmer la suppression ?');">Supprimer</button>
+                        </a>
+                    </div> 
+
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">Aucune offre trouvée.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <button onclick="toggleForm()" id="btn-toggle">Ajouter une offre</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+
+    <div id="formulaire-offre" style="display: none; margin-top: 20px; text-align: center;">
+        <h2 style="color: #29154a;">{% if offre_to_edit %}Modifier l'Offre{% else %}Ajouter une Nouvelle Offre{% endif %}</h2>
+        <form class="fr" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="offre_id" id="offre_id_field">
+            <button type="submit">{% if offre_to_edit %}Modifier{% else %}Enregistrer{% endif %}</button>
+            {% if offre_to_edit %}
+                <a href="{% url 'admin_offres' %}">Annuler</a>
+            {% endif %}
+        </form>
+    </div>
+</section>
+
+<script>
+    function toggleForm() {
+        const formDiv = document.getElementById("formulaire-offre");
+        const btn = document.getElementById("btn-toggle");
+
+        if (formDiv.style.display === "none") {
+            formDiv.style.display = "block";
+            btn.textContent = "Fermer le formulaire";
+        } else {
+            formDiv.style.display = "none";
+            btn.textContent = "Ajouter une offre";
+        }
+    }
+
+
+
+
+
+    
+    function modifierOffre(id, titre, description , lieu, contrat, profil, debut, candidature) {
+        document.getElementById('id_titre').value = titre;
+        document.getElementById('id_description').value = description;
+        document.getElementById('id_lieu').value = lieu;
+        document.getElementById('id_contrat').value = contrat;
+        document.getElementById('id_profil').value = profil;
+        document.getElementById('id_debut').value = debut;
+        document.getElementById('id_candidature').value = candidature;
+        document.getElementById('offre_id_field').value = id;
+        document.getElementById("formulaire-offre").style.display = "block";
+        document.getElementById("btn-toggle").textContent = "Fermer le formulaire";
+    }
+</script>
+
+
+<script>
+    function toggleForm() {
+        const formDiv = document.getElementById("formulaire-offre");
+        const btn = document.getElementById("btn-toggle");
+    
+        if (formDiv.style.display === "none") {
+            formDiv.style.display = "block";
+            btn.textContent = "Fermer le formulaire";
+            formDiv.scrollIntoView({ behavior: "smooth" });
+        } else {
+            formDiv.style.display = "none";
+            btn.textContent = "Ajouter une offre";
+        }
+    }
+</script>
+
+<script>
+    function modifierOffre(id, titre, description , lieu, contrat, profil, debut, candidature) {
+        document.getElementById('id_titre').value = titre;
+        document.getElementById('id_description').value = description;
+        document.getElementById('id_lieu').value = lieu;
+        document.getElementById('id_contrat').value = contrat;
+        document.getElementById('id_profil').value = profil;
+        document.getElementById('id_debut').value = debut;
+        document.getElementById('id_candidature').value = candidature;
+        document.getElementById('offre_id_field').value = id;
+    
+        const formDiv = document.getElementById("formulaire-offre");
+        formDiv.style.display = "block";
+        document.getElementById("btn-toggle").textContent = "Fermer le formulaire";
+    
+        // Défilement vers le formulaire
+        formDiv.scrollIntoView({ behavior: "smooth" });
+    }
+</script>
+{% comment %} <style>
+    .btn-modifier {
+    background-color:#5b36b4;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-modifier:hover {
+    background-color:rgb(111, 30, 173);
+    transform: scale(1.03);
+}
+</style> {% endcomment %}
+</body>
+</html>

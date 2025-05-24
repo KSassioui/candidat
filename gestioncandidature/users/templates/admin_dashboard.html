@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Administrateur</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<section class="bg">
+    <header class="navbar">
+        <div class="logo"> 
+            <img src="{% static 'images/image.png' %}" alt="HireFlex logo" class="logo-icon">
+           
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'admin_dashboard' %}">Accueil</a>
+            <a href="{% url 'admin_dashboard2' %}">Tableau de bord</a>
+            <a href="{% url 'admin_utilisateurs' %}">Utilisateurs</a>
+            <a href="{% url 'admin_candidatures' %}">Candidatures</a>
+            <a href="{% url 'admin_offres' %}">Offres</a>
+            <a href="{% url 'admin_notifications' %}">Notifications</a>
+        </nav>
+        <div class="signup">
+            <a href="{% url 'logout' %}">Déconnexion</a>
+        </div>
+    </header>
+
+    <div class="dashboard-intro">
+        <h1>Bienvenue sur votre espace administrateur</h1>
+        <p>Créez des offres, gérez les candidatures et surveillez les activités</p>
+        <div class="buttons">
+            <a href="{% url 'admin_offres' %}"><button>Créer une offre</button></a>
+            <a href="{% url 'admin_offres' %}">
+                <button style="background-color: transparent; border: 2px solid #a38bfa; color: #a38bfa;">Voir mes offres</button>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,180 @@
+/* GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* SECTION BACKGROUND */
+.bg {
+    padding: 20px;
+}
+
+/* HEADER */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2f4050;
+    padding: 10px 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.logo-icon {
+    height: 50px;
+}
+
+.nav-links a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #1ab394;
+}
+
+.signup a {
+    color: #ffffff;
+    background-color: #1ab394;
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.signup a:hover {
+    background-color: #17a186;
+}
+
+/* MAIN CONTENT */
+.content {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.content h1 {
+    text-align: center;
+    color: #2f4050;
+    margin-bottom: 30px;
+}
+
+/* TABLE STYLING */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+    text-align: left;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+    background-color: #1ab394;
+    color: white;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+td a {
+    color: #1ab394;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+select, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+/* BUTTON STYLES */
+button {
+    background-color: #1ab394;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #17a186;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .nav-links, .signup {
+        display: none;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    tr {
+        margin-bottom: 20px;
+    }
+
+    th {
+        background-color: transparent;
+        color: #1ab394;
+        font-size: 14px;
+    }
+
+    td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td::before {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #888;
+    }
+
+    td:nth-of-type(1)::before { content: "Candidat"; }
+    td:nth-of-type(2)::before { content: "Offre"; }
+    td:nth-of-type(3)::before { content: "CV"; }
+    td:nth-of-type(4)::before { content: "Lettre de Motivation"; }
+    td:nth-of-type(5)::before { content: "Statut"; }
+    td:nth-of-type(6)::before { content: "Commentaire"; }
+    td:nth-of-type(7)::before { content: "Actions"; }
+}

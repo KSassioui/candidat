@@ -1,0 +1,253 @@
+/* ======= 1. Styles Généraux ======= */
+ :root {
+  --primary-color: #6B46C1;
+  --primary-dark: #553C9A;
+  --primary-light: #9F7AEA;
+  --secondary-color: #4A5568;
+  --bg-light: #F7FAFC;
+  --text-dark: #2D3748;
+  --text-light: #A0AEC0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  margin: 0;
+}
+
+      .container-offre{
+
+      margin-top:120px;
+
+      }
+
+      .bg {
+        margin-top: 20px;
+       }
+
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: radial-gradient(circle at bottom, #4e2c92 0%, #1b0035 20%, #0e001f 100%);
+            border-radius: 15px;
+            padding: 10px 20px;
+            max-width: 1160px;
+            margin: 0 auto;
+            left: 150px;
+            top:20px;
+        
+        }
+
+        .nav-links {
+          display: flex;
+        gap: 30px;
+        margin-right: 80px;
+         }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        .left-section {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 40px;
+        }
+        
+        .logo-icon {
+            height: 30px;
+            vertical-align: middle;
+        }
+        
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .icon-button {
+            background-color: transparent;
+            border: 1px solid #444;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .icon-button img {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+        
+        .right-section {
+            display: flex;
+            gap: 15px;
+        }
+        
+     
+        
+        .consult-btn {
+            background-color: #6f5cff;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+.nav-links a,
+.signup a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.signup a:hover {
+  color: #ccc;
+}
+
+.signup a {
+  font-weight: 500;
+  margin-right: 100px;
+}
+
+
+
+/* ======= 3. Contenu Principal ======= */
+
+      main {
+    padding-top: 5px; 
+     padding-bottom: 5px; 
+     border-radius: 12px;/* Ajustement pour éviter la superposition avec le header */
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    background: radial-gradient(circle at bottom, #4e2c92 0%, #1b0035 20%, #0e001f 100%);
+}
+h2 {
+    font-size: 1.8em;
+    color: #f4f3f4;
+    margin-bottom: 20px;
+    margin-left: 30px;
+}
+
+
+table {
+    width: 95%;
+    max-width: 1100px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #f7f7f7;
+    color: rgb(0, 0, 0);
+    border-radius: 15px;
+    overflow: hidden;
+    font-size: 18px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+table th, table td {
+    padding: 20px; /* Plus de padding pour une meilleure lisibilité */
+    border: 1px solid #a89dba;
+    text-align: left;
+    color: #000000;
+}
+
+table th {
+    background: radial-gradient(circle at bottom, #8a4fff 0%, #1b00352a 40%, #0e001f18 100%);
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+table tr:nth-child(even) {
+    background-color: #c1b5cf;
+}
+
+table tr:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+form {
+    background: radial-gradient(circle at bottom, #8a4fff 0%, #1b00352a 40%, #0e001f18 100%);
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    max-width: 90%; /* Ajuster à 100% pour qu'il prenne toute la largeur disponible */
+    width: 80%; /* Ajuster la largeur pour qu'il prenne plus de place */
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+/* .suppprimer{
+    background-color: #0e001f;
+} */
+
+form label {
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+form input, form textarea, form select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgb(255, 255, 255);
+    color: white;
+    font-size: 16px;
+    margin-bottom: 10px;
+    outline: none;
+}
+
+
+button {
+    background-color: #5b36b4;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+/*---probleme btn--*/
+
+.btn-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.btn-modifier,
+.btn-supprimer {
+padding: 6px 12px;
+font-size: 14px;
+border: none;
+border-radius: 5px;
+color: white;
+cursor: pointer;
+transition: background-color 0.2s ease-in-out;
+}
+
