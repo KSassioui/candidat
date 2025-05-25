@@ -1,0 +1,1 @@
+web: gunicorn gestioncandidature.wsgi --chdir gestioncandidature
