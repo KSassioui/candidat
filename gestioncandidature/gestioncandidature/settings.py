@@ -149,7 +149,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # pour la production
 
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'static'),  # où sont tes fichiers CSS/JS/images
+    os.path.join(BASE_DIR, 'static'),  # où sont tes fichiers CSS/JS/images
 ]
 
 
