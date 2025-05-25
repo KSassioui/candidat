@@ -1,1 +1,1 @@
-web: bash -c "cd gestioncandidature && python manage.py migrate && python manage.py collectstatic --noinput && python create_superuser.py && gunicorn gestioncandidature.wsgi:application --bind 0.0.0.0:8080"
+web: bash -c "cd gestioncandidature && python manage.py migrate && python manage.py collectstatic --noinput && python create_superuser.py && gunicorn gestioncandidature.wsgi"
