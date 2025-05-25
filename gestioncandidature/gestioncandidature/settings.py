@@ -149,12 +149,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # pour la production
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # où sont tes fichiers CSS/JS/images
+    # os.path.join(BASE_DIR, 'static'),  # où sont tes fichiers CSS/JS/images
 ]
 
+
+
+
 MIDDLEWARE = [
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-    # ... les autres middlewares
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',  # ⬅ Ajoute ceci en haut
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  # ⬅ Important
+    'django.contrib.messages.middleware.MessageMiddleware',  # ⬅ Important
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
