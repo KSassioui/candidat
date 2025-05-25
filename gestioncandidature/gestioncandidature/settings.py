@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'gestioncandidature.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gestioncandidattt',  # replace with your database name
-        'USER': 'root',  # replace with your MySQL username
-        'PASSWORD': '',  # replace with your MySQL password
-        'HOST': 'localhost',  # or your MySQL host
-        'PORT': '3306',  # default MySQL port
+        'NAME': os.getenv('MYSQLDATABASE'),
+        'USER': os.getenv('MYSQLUSER'),
+        'PASSWORD': os.getenv('MYSQLPASSWORD'),
+        'HOST': os.getenv('MYSQLHOST'),
+        'PORT': os.getenv('MYSQLPORT', '3306'),
     }
 }
 
