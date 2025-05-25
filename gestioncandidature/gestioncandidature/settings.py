@@ -152,3 +152,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # où sont tes fichiers CSS/JS/images
 ]
 
+MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # ... les autres middlewares
+]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
